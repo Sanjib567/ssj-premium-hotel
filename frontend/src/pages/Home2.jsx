@@ -34,30 +34,30 @@ const slides = [
 ];
 
 const bubbleData = [
-  { left: "2%", size: 24, duration: 7, delay: 0 },
-  { left: "6%", size: 12, duration: 5, delay: 1 },
-  { left: "10%", size: 38, duration: 10, delay: 3 },
-  { left: "15%", size: 18, duration: 6, delay: 2 },
-  { left: "20%", size: 52, duration: 12, delay: 0 },
-  { left: "26%", size: 14, duration: 6, delay: 4 },
-  { left: "31%", size: 30, duration: 8, delay: 1 },
-  { left: "37%", size: 45, duration: 11, delay: 3 },
-  { left: "43%", size: 16, duration: 6, delay: 0 },
-  { left: "48%", size: 58, duration: 13, delay: 2 },
-  { left: "54%", size: 13, duration: 5, delay: 4 },
-  { left: "59%", size: 32, duration: 9, delay: 1 },
-  { left: "65%", size: 28, duration: 12, delay: 3 },
-  { left: "71%", size: 17, duration: 6, delay: 0 },
-  { left: "76%", size: 38, duration: 10, delay: 2 },
-  { left: "82%", size: 22, duration: 7, delay: 4 },
-  { left: "87%", size: 34, duration: 13, delay: 1 },
-  { left: "92%", size: 15, duration: 5, delay: 3 },
-  { left: "97%", size: 30, duration: 8, delay: 0 },
-  { left: "13%", size: 10, duration: 5, delay: 2 },
-  { left: "35%", size: 20, duration: 7, delay: 4 },
-  { left: "57%", size: 25, duration: 8, delay: 1 },
-  { left: "73%", size: 12, duration: 5, delay: 3 },
-  { left: "90%", size: 27, duration: 9, delay: 2 },
+  { left: "2%", size: 24, duration: 7, delay: -2 },
+  { left: "6%", size: 12, duration: 5, delay: -1 },
+  { left: "10%", size: 38, duration: 10, delay: -6 },
+  { left: "15%", size: 18, duration: 6, delay: -3 },
+  { left: "20%", size: 52, duration: 12, delay: -8 },
+  { left: "26%", size: 14, duration: 6, delay: -4 },
+  { left: "31%", size: 30, duration: 8, delay: -2 },
+  { left: "37%", size: 45, duration: 11, delay: -7 },
+  { left: "43%", size: 16, duration: 6, delay: -1 },
+  { left: "48%", size: 58, duration: 13, delay: -9 },
+  { left: "54%", size: 13, duration: 5, delay: -3 },
+  { left: "59%", size: 32, duration: 9, delay: -5 },
+  { left: "65%", size: 28, duration: 12, delay: -6 },
+  { left: "71%", size: 17, duration: 6, delay: -2 },
+  { left: "76%", size: 38, duration: 10, delay: -7 },
+  { left: "82%", size: 22, duration: 7, delay: -4 },
+  { left: "87%", size: 34, duration: 13, delay: -10 },
+  { left: "92%", size: 15, duration: 5, delay: -2 },
+  { left: "97%", size: 30, duration: 8, delay: -5 },
+  { left: "13%", size: 10, duration: 5, delay: -3 },
+  { left: "35%", size: 20, duration: 7, delay: -5 },
+  { left: "57%", size: 25, duration: 8, delay: -3 },
+  { left: "73%", size: 12, duration: 5, delay: -4 },
+  { left: "90%", size: 27, duration: 9, delay: -6 },
 ];
 
 const Home2 = () => {
@@ -199,10 +199,12 @@ const Home2 = () => {
         @keyframes bubbleFloat {
             0% {
               transform: translate3d(0, 60vh, 0) scale(0.25);
-              opacity: 0;
+              opacity: 0.1;
             }
 
-            
+            10% {
+              opacity: 0.9;
+            }
 
             30% {
               transform: translate3d(30px, 40vh, 0) scale(0.55);
