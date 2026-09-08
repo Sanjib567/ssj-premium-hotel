@@ -1,24 +1,30 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from "react";
 
 const slides = [
   {
-    image: 'https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1920&q=80',
-    subtitle: 'PREMIUM ROOMS & FAMILY-FRIENDLY HOSPITALITY',
-    title: 'BEST FAMILY HOTEL IN PATRAPADA BHUBANESWAR WITH PREMIUM ROOMS',
-    description: 'Experience a comfortable and affordable stay with premium rooms, modern amenities, and family-friendly hospitality in the heart of Patrapada.'
+    image:
+      "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1920&q=80",
+    subtitle: "PREMIUM ROOMS & FAMILY-FRIENDLY HOSPITALITY",
+    title: "BEST FAMILY HOTEL IN PATRAPADA BHUBANESWAR WITH PREMIUM ROOMS",
+    description:
+      "Experience a comfortable and affordable stay with premium rooms, modern amenities, and family-friendly hospitality in the heart of Patrapada.",
   },
   {
-    image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1920&q=80',
-    subtitle: 'EXPERIENCE THE LUXURY.',
-    title: 'VISIT THE TEMPLE CITY',
-    description: 'Savor exquisite culinary delights and unmatched hospitality during your stay in Bhubaneswar.'
+    image:
+      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1920&q=80",
+    subtitle: "EXPERIENCE THE LUXURY.",
+    title: "VISIT THE TEMPLE CITY",
+    description:
+      "Savor exquisite culinary delights and unmatched hospitality during your stay in Bhubaneswar.",
   },
   {
-    image: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1920&q=80',
-    subtitle: 'EXPERIENCE THE LUXURY.',
-    title: 'A TRULY IMMERSIVE RELAXING PLACE.',
-    description: 'Unwind in elegantly designed spaces crafted for absolute peace and comfort.'
-  }
+    image:
+      "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1920&q=80",
+    subtitle: "EXPERIENCE THE LUXURY.",
+    title: "A TRULY IMMERSIVE RELAXING PLACE.",
+    description:
+      "Unwind in elegantly designed spaces crafted for absolute peace and comfort.",
+  },
 ];
 
 export default function Hero() {
@@ -37,7 +43,7 @@ export default function Hero() {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext("2d");
     let animationFrameId;
 
     let width = (canvas.width = window.innerWidth);
@@ -48,7 +54,7 @@ export default function Hero() {
       width = canvas.width = window.innerWidth;
       height = canvas.height = window.innerHeight;
     };
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
 
     // Create particles for the wave effect
     const particles = Array.from({ length: 250 }, () => ({
@@ -78,7 +84,7 @@ export default function Hero() {
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(255, 215, 0, ${p.opacity})`;
         ctx.shadowBlur = 12;
-        ctx.shadowColor = 'rgba(255, 215, 0, 0.8)';
+        ctx.shadowColor = "rgba(255, 215, 0, 0.8)";
         ctx.fill();
 
         // Loop particles back into view if they drift off-screen
@@ -94,7 +100,7 @@ export default function Hero() {
     render();
 
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", handleResize);
       cancelAnimationFrame(animationFrameId);
     };
   }, []);
@@ -104,7 +110,7 @@ export default function Hero() {
   return (
     <div className="relative w-full h-screen overflow-hidden bg-slate-950">
       {/* Background Image with Dark Vignette Gradient */}
-      <div 
+      <div
         className="absolute inset-0 bg-cover bg-center transition-all duration-1000 ease-in-out scale-105"
         style={{ backgroundImage: `url(${slide.image})` }}
       >
@@ -112,7 +118,10 @@ export default function Hero() {
       </div>
 
       {/* AI Flowing Particle Wave Canvas Overlay */}
-      <canvas ref={canvasRef} className="absolute inset-0 pointer-events-none z-10" />
+      <canvas
+        ref={canvasRef}
+        className="absolute inset-0 pointer-events-none z-10"
+      />
 
       {/* Hero Content Layer */}
       <div className="relative z-20 max-w-7xl mx-auto h-full flex flex-col justify-center px-6 md:px-12 pt-20">
@@ -139,7 +148,7 @@ export default function Hero() {
               onClick={() => setCurrentSlide(index)}
               aria-label={`Go to slide ${index + 1}`}
               className={`h-3 rounded-full transition-all duration-300 ${
-                currentSlide === index ? 'bg-amber-400 w-8' : 'bg-white/50 w-3'
+                currentSlide === index ? "bg-amber-400 w-8" : "bg-white/50 w-3"
               }`}
             />
           ))}
