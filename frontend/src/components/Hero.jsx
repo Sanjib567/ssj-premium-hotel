@@ -123,22 +123,71 @@ export default function Hero() {
         className="absolute inset-0 pointer-events-none z-10"
       />
 
-      {/* Hero Content Layer */}
-      <div className="relative z-20 max-w-7xl mx-auto h-full flex flex-col justify-center px-6 md:px-12 pt-20">
-        <div className="max-w-2xl animate-fade-in">
-          <span className="text-amber-400 font-semibold tracking-widest text-sm md:text-base uppercase block mb-3 drop-shadow">
-            {slide.subtitle}
-          </span>
-          <h1 className="text-3xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-tight mb-6 drop-shadow-xl">
-            {slide.title}
-          </h1>
-          <p className="text-slate-200 text-base md:text-lg mb-8 max-w-xl font-light drop-shadow">
-            {slide.description}
-          </p>
-          <button className="bg-red-600 hover:bg-red-700 text-white font-medium px-8 py-3.5 rounded-full shadow-lg transition duration-300 transform hover:scale-105">
-            Book Your Stay Now
-          </button>
+{/* Hero Content Layer */}
+<div className="relative z-20 max-w-7xl mx-auto h-full flex flex-col justify-center px-6 md:px-12 pt-16">
+  <div className="max-w-xl animate-fade-in">
+    <span className="text-amber-400 font-semibold tracking-widest text-xs md:text-sm uppercase block mb-2 drop-shadow">
+      {slide.subtitle}
+    </span>
+    <h1 className="text-2xl md:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-snug mb-4 drop-shadow-xl">
+      {slide.title}
+    </h1>
+    <p className="text-slate-200 text-sm md:text-base mb-6 max-w-md font-light drop-shadow">
+      {slide.description}
+    </p>
+
+    {/* CTA Buttons */}
+    <div className="flex flex-col md:flex-row md:items-center gap-4">
+      {/* Primary CTA */}
+      <button className="bg-red-600 hover:bg-red-700 text-white font-medium px-6 py-3 rounded-full shadow-lg transition duration-300 transform hover:scale-105">
+        Book Your Stay Now
+      </button>
+
+      {/* Secondary CTA - Solid Yellow */}
+      <button className="bg-amber-400 hover:bg-amber-500 text-black font-medium px-6 py-3 rounded-full shadow-lg transition duration-300 transform hover:scale-105">
+        Call Now
+      </button>
+    </div>
+
+    {/* Quick Info Boxes */}
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
+      {/* Rating */}
+      <div className="flex flex-col items-center bg-slate-900/70 rounded-lg p-4 shadow-md">
+        <div className="w-12 h-12 flex items-center justify-center rounded-full bg-[#6A1B1A] mb-2">
+          <span className="text-amber-400 text-xl">⭐</span>
         </div>
+        <p className="text-amber-400 font-bold text-base">4.5+ Rating</p>
+        <p className="text-slate-300 text-xs">Google Reviews</p>
+      </div>
+
+      {/* AIIMS */}
+      <div className="flex flex-col items-center bg-slate-900/70 rounded-lg p-4 shadow-md">
+        <div className="w-12 h-12 flex items-center justify-center rounded-full bg-[#6A1B1A] mb-2">
+          <span className="text-amber-400 text-xl">🔑</span>
+        </div>
+        <p className="text-amber-400 font-bold text-base">5 Min</p>
+        <p className="text-slate-300 text-xs">From AIIMS</p>
+      </div>
+
+      {/* Temple */}
+      <div className="flex flex-col items-center bg-slate-900/70 rounded-lg p-4 shadow-md">
+        <div className="w-12 h-12 flex items-center justify-center rounded-full bg-[#6A1B1A] mb-2">
+          <span className="text-amber-400 text-xl">🛕</span>
+        </div>
+        <p className="text-amber-400 font-bold text-base">10 Min</p>
+        <p className="text-slate-300 text-xs">Lingaraj Temple</p>
+      </div>
+
+      {/* Parking */}
+      <div className="flex flex-col items-center bg-slate-900/70 rounded-lg p-4 shadow-md">
+        <div className="w-12 h-12 flex items-center justify-center rounded-full bg-[#6A1B1A] mb-2">
+          <span className="text-amber-400 text-xl">🚗</span>
+        </div>
+        <p className="text-amber-400 font-bold text-base">Free</p>
+        <p className="text-slate-300 text-xs">Private Parking</p>
+      </div>
+    </div>
+  </div>
 
         {/* Slide Indicators at Bottom Right */}
         <div className="absolute bottom-10 right-12 flex space-x-3 z-30">
