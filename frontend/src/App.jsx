@@ -8,6 +8,7 @@ import Rooms from './pages/Rooms';
 import Amenities from './pages/Amenities';
 import Contact from './pages/Contact';
 import Booking from './pages/Booking';
+import Home2 from './pages/Home2';
 
 function Home() {
     return <Hero />;
@@ -24,6 +25,7 @@ export default function App() {
                     <Route path="/amenities" element={<Amenities />} />
                     <Route path="/contact" element={<Contact />} />
                     <Route path="/book" element={<Booking />} />
+                    <Route path="/home2" element={<Home2 />} />
                 </Routes>
             </div>
         </BrowserRouter>
