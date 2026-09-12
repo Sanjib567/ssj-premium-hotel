@@ -2,24 +2,21 @@ import React, { useState, useEffect, useRef } from "react";
 
 const slides = [
   {
-    image:
-      "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1920&q=80",
+    image: "/slide.1.jpeg",
     subtitle: "PREMIUM ROOMS & FAMILY-FRIENDLY HOSPITALITY",
     title: "BEST FAMILY HOTEL IN PATRAPADA BHUBANESWAR WITH PREMIUM ROOMS",
     description:
       "Experience a comfortable and affordable stay with premium rooms, modern amenities, and family-friendly hospitality in the heart of Patrapada.",
   },
   {
-    image:
-      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1920&q=80",
+    image: "/slide.21.jpeg",
     subtitle: "EXPERIENCE THE LUXURY.",
     title: "VISIT THE TEMPLE CITY",
     description:
       "Savor exquisite culinary delights and unmatched hospitality during your stay in Bhubaneswar.",
   },
   {
-    image:
-      "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1920&q=80",
+    image: "/slide.3.jpeg",
     subtitle: "EXPERIENCE THE LUXURY.",
     title: "A TRULY IMMERSIVE RELAXING PLACE.",
     description:
@@ -39,7 +36,7 @@ export default function Hero() {
     return () => clearInterval(timer);
   }, []);
 
-  // AI-style flowing particle wave animation canvas
+  // Floating Bubble & Particle Animation Canvas
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -56,42 +53,43 @@ export default function Hero() {
     };
     window.addEventListener("resize", handleResize);
 
-    // Create particles for the wave effect
-    const particles = Array.from({ length: 250 }, () => ({
+    const particles = Array.from({ length: 60 }, () => ({
       x: Math.random() * width,
       y: Math.random() * height,
-      size: Math.random() * 2.5 + 1,
-      baseX: Math.random() * width,
-      angle: Math.random() * Math.PI * 2,
-      speed: Math.random() * 0.02 + 0.01,
-      opacity: Math.random() * 0.7 + 0.3,
+      radius: Math.random() * 6 + 2,
+      speedY: Math.random() * 0.8 + 0.3,
+      speedX: (Math.random() - 0.5) * 0.4,
+      opacity: Math.random() * 0.5 + 0.2,
+      pulseSpeed: Math.random() * 0.02 + 0.01,
+      pulseAngle: Math.random() * Math.PI * 2,
     }));
-
-    let step = 0;
 
     const render = () => {
       ctx.clearRect(0, 0, width, height);
-      step += 0.03;
 
-      particles.forEach((p, index) => {
-        // Create an organic wave flow movement
-        p.angle += p.speed;
-        p.y += Math.sin(step + index * 0.1) * 0.6;
-        p.x += Math.cos(step * 0.5) * 0.4;
+      particles.forEach((p) => {
+        p.y -= p.speedY;
+        p.x += p.speedX + Math.sin(p.pulseAngle) * 0.2;
+        p.pulseAngle += p.pulseSpeed;
 
-        // Draw the golden particle
+        if (p.y < -20) {
+          p.y = height + 20;
+          p.x = Math.random() * width;
+        }
+        if (p.x > width + 20) p.x = -20;
+        if (p.x < -20) p.x = width + 20;
+
         ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        
         ctx.fillStyle = `rgba(255, 215, 0, ${p.opacity})`;
-        ctx.shadowBlur = 12;
-        ctx.shadowColor = "rgba(255, 215, 0, 0.8)";
+        ctx.strokeStyle = `rgba(255, 255, 255, ${p.opacity * 0.6})`;
+        ctx.lineWidth = 1.2;
+        ctx.shadowBlur = 10;
+        ctx.shadowColor = "rgba(255, 215, 0, 0.6)";
+        
         ctx.fill();
-
-        // Loop particles back into view if they drift off-screen
-        if (p.x > width) p.x = 0;
-        if (p.x < 0) p.x = width;
-        if (p.y > height) p.y = 0;
-        if (p.y < 0) p.y = height;
+        ctx.stroke();
       });
 
       animationFrameId = requestAnimationFrame(render);
@@ -109,88 +107,78 @@ export default function Hero() {
 
   return (
     <div className="relative w-full h-screen overflow-hidden bg-slate-950">
-      {/* Background Image with Dark Vignette Gradient */}
-      <div
-        className="absolute inset-0 bg-cover bg-center transition-all duration-1000 ease-in-out scale-105"
-        style={{ backgroundImage: `url(${slide.image})` }}
-      >
-        <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/60 to-black/30" />
+      {/* Background Container: Side-by-Side Split Layout for Slide 1 to show full vertical building on the right */}
+      <div className="absolute inset-0 w-full h-full overflow-hidden bg-slate-950 flex">
+        {currentSlide === 0 ? (
+          <>
+            {/* Left side solid dark background for text */}
+            <div className="w-full lg:w-1/2 h-full bg-slate-950 z-10" />
+            {/* Right side background image container showing the entire building vertically */}
+            <div className="hidden lg:flex w-1/2 h-full items-center justify-center relative bg-slate-950">
+              <img
+                src={slide.image}
+                alt="SSJ Premium Building"
+                className="w-full h-full object-cover object-center animate-fade-in"
+                style={{ imageRendering: 'high-quality' }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-transparent to-black/30" />
+            </div>
+          </>
+        ) : (
+          <div
+            key={currentSlide}
+            className="absolute inset-0 bg-cover bg-center transition-all duration-1000 ease-in-out animate-fade-in w-full h-full"
+            style={{ 
+              backgroundImage: `url(${slide.image})`,
+              imageRendering: 'high-quality'
+            }}
+          >
+            <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/70 to-black/30" />
+          </div>
+        )}
       </div>
 
-      {/* AI Flowing Particle Wave Canvas Overlay */}
+      {/* Floating Bubble & Particle Animation Canvas Overlay */}
       <canvas
         ref={canvasRef}
-        className="absolute inset-0 pointer-events-none z-10"
+        className="absolute inset-0 pointer-events-none z-20"
       />
 
-{/* Hero Content Layer */}
-<div className="relative z-20 max-w-7xl mx-auto h-full flex flex-col justify-center px-6 md:px-12 pt-16">
-  <div className="max-w-xl animate-fade-in">
-    <span className="text-amber-400 font-semibold tracking-widest text-xs md:text-sm uppercase block mb-2 drop-shadow">
-      {slide.subtitle}
-    </span>
-    <h1 className="text-2xl md:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-snug mb-4 drop-shadow-xl">
-      {slide.title}
-    </h1>
-    <p className="text-slate-200 text-sm md:text-base mb-6 max-w-md font-light drop-shadow">
-      {slide.description}
-    </p>
+      {/* Hero Content Layer */}
+      <div className="relative z-30 max-w-7xl mx-auto h-full flex flex-col justify-center px-6 md:px-12 pt-16">
+        <div className="max-w-2xl animate-fade-in">
+          <span className="text-amber-400 font-semibold tracking-widest text-xs md:text-sm uppercase block mb-2 drop-shadow">
+            {slide.subtitle}
+          </span>
+          <h1 className="text-2xl md:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-snug mb-4 drop-shadow-xl">
+            {slide.title}
+          </h1>
+          <p className="text-slate-200 text-sm md:text-base mb-6 max-w-lg font-light drop-shadow">
+            {slide.description}
+          </p>
 
-    {/* CTA Buttons */}
-    <div className="flex flex-col md:flex-row md:items-center gap-4">
-      {/* Primary CTA */}
-      <button className="bg-red-600 hover:bg-red-700 text-white font-medium px-6 py-3 rounded-full shadow-lg transition duration-300 transform hover:scale-105">
-        Book Your Stay Now
-      </button>
+          {/* CTA Buttons */}
+          <div className="flex flex-col md:flex-row md:items-center gap-4">
+            <a 
+              href="https://wa.me/917656949417?text=Hello%20SSJ%20Premium,%20I%20would%20like%20to%20book%20a%20stay."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-red-600 hover:bg-red-700 text-white font-medium px-6 py-3 rounded-full shadow-lg transition duration-300 transform hover:scale-105 text-center"
+            >
+              Book Your Stay Now
+            </a>
 
-      {/* Secondary CTA - Solid Yellow */}
-      <button className="bg-amber-400 hover:bg-amber-500 text-black font-medium px-6 py-3 rounded-full shadow-lg transition duration-300 transform hover:scale-105">
-        Call Now
-      </button>
-    </div>
-
-    {/* Quick Info Boxes */}
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
-      {/* Rating */}
-      <div className="flex flex-col items-center bg-slate-900/70 rounded-lg p-4 shadow-md">
-        <div className="w-12 h-12 flex items-center justify-center rounded-full bg-[#6A1B1A] mb-2">
-          <span className="text-amber-400 text-xl">⭐</span>
+            <a 
+              href="tel:+917656949417"
+              className="bg-amber-400 hover:bg-amber-500 text-black font-medium px-6 py-3 rounded-full shadow-lg transition duration-300 transform hover:scale-105 text-center"
+            >
+              Call Now
+            </a>
+          </div>
         </div>
-        <p className="text-amber-400 font-bold text-base">4.5+ Rating</p>
-        <p className="text-slate-300 text-xs">Google Reviews</p>
-      </div>
-
-      {/* AIIMS */}
-      <div className="flex flex-col items-center bg-slate-900/70 rounded-lg p-4 shadow-md">
-        <div className="w-12 h-12 flex items-center justify-center rounded-full bg-[#6A1B1A] mb-2">
-          <span className="text-amber-400 text-xl">🔑</span>
-        </div>
-        <p className="text-amber-400 font-bold text-base">5 Min</p>
-        <p className="text-slate-300 text-xs">From AIIMS</p>
-      </div>
-
-      {/* Temple */}
-      <div className="flex flex-col items-center bg-slate-900/70 rounded-lg p-4 shadow-md">
-        <div className="w-12 h-12 flex items-center justify-center rounded-full bg-[#6A1B1A] mb-2">
-          <span className="text-amber-400 text-xl">🛕</span>
-        </div>
-        <p className="text-amber-400 font-bold text-base">10 Min</p>
-        <p className="text-slate-300 text-xs">Lingaraj Temple</p>
-      </div>
-
-      {/* Parking */}
-      <div className="flex flex-col items-center bg-slate-900/70 rounded-lg p-4 shadow-md">
-        <div className="w-12 h-12 flex items-center justify-center rounded-full bg-[#6A1B1A] mb-2">
-          <span className="text-amber-400 text-xl">🚗</span>
-        </div>
-        <p className="text-amber-400 font-bold text-base">Free</p>
-        <p className="text-slate-300 text-xs">Private Parking</p>
-      </div>
-    </div>
-  </div>
 
         {/* Slide Indicators at Bottom Right */}
-        <div className="absolute bottom-10 right-12 flex space-x-3 z-30">
+        <div className="absolute bottom-10 right-12 flex space-x-3 z-40">
           {slides.map((_, index) => (
             <button
               key={index}
